@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AsmResolver" Version="5.5.0" />
+    <PackageReference Include="AsmResolver.DotNet" Version="5.5.0" />
+    <PackageReference Include="AsmResolver.PE" Version="5.5.0" />
+    <PackageReference Include="AsmResolver.PE.File" Version="5.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProwlynxNET.Core\ProwlynxNET.Core.csproj" />
+  </ItemGroup>
+	
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="REM Copy the DLL and PDB to the folder of the obfuscator&#xD;&#xA;xcopy /sey &quot;$(TargetPath)&quot; &quot;$(SolutionDir)$(SolutionName)\bin\Debug\net8.0\Protections\&quot;&#xD;&#xA;xcopy /sey &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(SolutionDir)$(SolutionName)\bin\Debug\net8.0\Protections\&quot;" />
+	</Target>
+
+</Project>
