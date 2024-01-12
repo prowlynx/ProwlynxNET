@@ -35,7 +35,7 @@ ProwlynxNET.Core.Models.IService --> ProwlynxNET.Core.Models.Services.IInjection
 #### Public  methods
 | Returns | Name |
 | --- | --- |
-| `IList`&lt;`TypeDefinition`&gt; | [`Inject`](#inject-13)(`...`) |
+| `IList`&lt;`TypeDefinition`&gt; | [`Inject`](#inject-13)(`...`)<br>Injects the specified Module to another module.<br>                Does NOT add the result to the module. |
 
 ## Details
 ### Summary
@@ -57,36 +57,42 @@ public InjectorService()
 
 ### Methods
 #### Inject [1/3]
-[*Source code*](https://github.com///blob//ProwlynxNET.Core/Services/Injector/InjectorService.cs#L27)
+[*Source code*](https://github.com///blob//ProwlynxNET.Core/Services/Injector/InjectorService.cs#L28)
 ```csharp
 public virtual IList<TypeDefinition> Inject(ModuleDefinition injectModule, ModuleDefinition target)
 ```
 ##### Arguments
 | Type | Name | Description |
 | --- | --- | --- |
-| `ModuleDefinition` | injectModule |   |
-| `ModuleDefinition` | target |   |
+| `ModuleDefinition` | injectModule | The source ModuleDefMD. |
+| `ModuleDefinition` | target | The target module. |
+
+##### Summary
+Injects the specified Module to another module.
+                Does NOT add the result to the module.
 
 #### Inject [2/3]
-[*Source code*](https://github.com///blob//ProwlynxNET.Core/Services/Injector/InjectorService.cs#L42)
+[*Source code*](https://github.com///blob//ProwlynxNET.Core/Services/Injector/InjectorService.cs#L44)
 ```csharp
-public virtual IMemberDefinition Inject(IMemberDefinition def, ModuleDefinition target)
+public virtual T Inject<T>(T def, ModuleDefinition target)
+where T : IMemberDefinition
 ```
 ##### Arguments
 | Type | Name | Description |
 | --- | --- | --- |
-| `IMemberDefinition` | def |   |
+| `T` | def |   |
 | `ModuleDefinition` | target |   |
 
 #### Inject [3/3]
-[*Source code*](https://github.com///blob//ProwlynxNET.Core/Services/Injector/InjectorService.cs#L50)
+[*Source code*](https://github.com///blob//ProwlynxNET.Core/Services/Injector/InjectorService.cs#L53)
 ```csharp
-public virtual IList<IMemberDefinition> Inject(IEnumerable<IMemberDefinition> def, ModuleDefinition target)
+public virtual IList<T> Inject<T>(IEnumerable<T> def, ModuleDefinition target)
+where T : IMemberDefinition
 ```
 ##### Arguments
 | Type | Name | Description |
 | --- | --- | --- |
-| `IEnumerable`&lt;`IMemberDefinition`&gt; | def |   |
+| `IEnumerable`&lt;`T`&gt; | def |   |
 | `ModuleDefinition` | target |   |
 
 ### Properties

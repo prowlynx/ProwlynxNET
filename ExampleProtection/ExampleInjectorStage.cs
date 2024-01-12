@@ -48,7 +48,7 @@ namespace ExampleProtection
             var td = thisModule.GetAllTypes().First(x => x.FullName.Contains("ExampleProtection.InjectedType"));
 
             // Prepare it for adding to the new module.
-            var preparedType = (TypeDefinition)t.Injector.Inject(td, t.Module!);
+            var preparedType = t.Injector.Inject(td, t.Module!);
             preparedType.Name = "SuccessfullyInjectedType";
             preparedType.Namespace = "Injected";
 

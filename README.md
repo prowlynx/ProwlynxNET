@@ -37,8 +37,38 @@ Made simple by AsmResolver's cloning abilities this allows you to quickly inject
 
 Check out the example protection for how to deal with .NET and .NET Framework to make sure the two are kept distinctly separate. 
 
-## Cryptography Service
-This one is a bit incomplete at the moment but the Utils class has most of the crypto content you might want to access. 
+## Cryptography Services
+Simple cryptography services such as Aes and Hashing (SHA1, 256) have been implemented and are accessible through the ObfuscationTask.CryptoProvider. 
+
+
+# Architecture
+## Protections
+
+A protection may have multiple stages each with different priorities in which to be run. A stage itself might have multiple different "sub-stages" that also have different priorties in which to be run. Therefore, a stage and protection both implement the same interface: [IProtection](/docs/API/prowlynxnet/core/models/IProtection.md).
+
+A protection must inherit from [ProtectionBase](/docs/API/prowlynxnet/core/protections/ProtectionBase.md)
+
+A stage must inherit from either a [Stage](/docs/API/prowlynxnet/core/protections/Stage.md) or [MDStage](/docs/API/prowlynxnet/core/protections/MDStage.md)
+
+## Service Providers
+A service provider provides service instances. It is in other words a glorified collection of service instances.
+
+The currently implemented [Service Providers](/docs/API/prowlynxnet/core/serviceproviders) include:
+* ArgumentProvider
+* AttributeArgumentProvider
+* CryptoProvider
+* InjectionProvider
+* MarkerProvider
+
+A service provider may contain one or more service instances, some like the [Injection Provider](/docs/API/prowlynxnet/core/serviceproviders/InjectionProvider.md) add only one with a shortcut to it accessible using the [ServiceProviderBaseT.First](/docs/API/prowlynxnet/core/serviceproviders/ServiceProviderBaseT.md#first) property. 
+
+## Services
+Services all implement an interface of their same name which must implement the [IService](/docs/API/prowlynxnet/core/models/IService.md) interface.
+
+## Engine
+The engine used involves a simple setup and an [ObfuscationTask](/docs/API/prowlynxnet/core/ObfuscationTask.md).
+
+An [ObfuscationTask](/docs/API/prowlynxnet/core/ObfuscationTask.md) contains the context of the obfuscation including the different [Service Providers](/docs/API/prowlynxnet/core/serviceproviders) available. It also keeps the module that is currently being processed (unless inside an [MDStage](/docs/API/prowlynxnet/core/protections/MDStage.md) in which it is null) as a property.
 
 # Future Plans
 It's always good to have something to be striving towards, right?

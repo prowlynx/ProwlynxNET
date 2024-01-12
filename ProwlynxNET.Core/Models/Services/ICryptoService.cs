@@ -16,12 +16,12 @@ namespace ProwlynxNET.Core.Models.Services
         /// <summary>
         ///     The key for the cryptography operation
         /// </summary>
-        byte[] Key { get; set; }
+        byte[]? Key { get; set; }
 
         /// <summary>
         ///     Sometimes an algorithm may require additional data, an IV for example.
         /// </summary>
-        byte[] AdditionalData { get; set; }
+        byte[]? AdditionalData { get; set; }
 
         #endregion
 

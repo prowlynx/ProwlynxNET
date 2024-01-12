@@ -29,7 +29,7 @@ namespace ProwlynxNET.Core.Models.Services
         /// <param name="def">The source definition.</param>
         /// <param name="target">The target module.</param>
         /// <returns>The injected definition.</returns>
-        IMemberDefinition Inject(IMemberDefinition def, ModuleDefinition target);
+        T Inject<T>(T def, ModuleDefinition target) where T : IMemberDefinition;
 
         /// <summary>
         ///     Injects the specified definitions to another module.
@@ -38,7 +38,7 @@ namespace ProwlynxNET.Core.Models.Services
         /// <param name="def">The source definitions.</param>
         /// <param name="target">The target module.</param>
         /// <returns>The injected definitions.</returns>
-        IList<IMemberDefinition> Inject(IEnumerable<IMemberDefinition> def, ModuleDefinition target);
+        IList<T> Inject<T>(IEnumerable<T> def, ModuleDefinition target) where T : IMemberDefinition;
 
         #endregion
     }

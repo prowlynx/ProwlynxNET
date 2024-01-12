@@ -23,6 +23,7 @@ namespace ProwlynxNET.Core.Services.Injector
         public string Description =>
             "A service that provides the ability to copy types and methods into another module.";
 
+        /// <inheritdoc />
         public IList<TypeDefinition> Inject(ModuleDefinition injectModule, ModuleDefinition target)
         {
             var cloner = new MemberCloner(target);
@@ -38,7 +39,8 @@ namespace ProwlynxNET.Core.Services.Injector
                     .ToList();
         }
 
-        public IMemberDefinition Inject(IMemberDefinition def, ModuleDefinition target)
+        /// <inheritdoc />
+        public T Inject<T>(T def, ModuleDefinition target) where T : IMemberDefinition
         {
             var results = new MemberCloner(target)
                                 .Include(def)
@@ -46,13 +48,15 @@ namespace ProwlynxNET.Core.Services.Injector
             return results.GetClonedMember(def);
         }
 
-        public IList<IMemberDefinition> Inject(IEnumerable<IMemberDefinition> def, ModuleDefinition target)
+        /// <inheritdoc />
+        public IList<T> Inject<T>(IEnumerable<T> def, ModuleDefinition target) where T : IMemberDefinition
         {
             var results = new MemberCloner(target)
-                                .Include(def)
+                                // Why...? .NET...
+                                .Include(def.Cast<IMemberDefinition>())
                                 .Clone();
             return results.ClonedMembers
-                .Cast<IMemberDefinition>()
+                .Cast<T>()
                 .ToList();
         }
 

@@ -33,8 +33,11 @@ The cryptography provider.
 
 ### Constructors
 #### CryptoProvider
+[*Source code*](https://github.com///blob//ProwlynxNET.Core/ServiceProviders/CryptoProvider.cs#L19)
 ```csharp
 public CryptoProvider()
 ```
+##### Summary
+Creates a new crypto provider which adds relevant [ICryptoService](../models/services/ICryptoService.md) 's.
 
 *Generated with* [*ModularDoc*](https://github.com/hailstorm75/ModularDoc)

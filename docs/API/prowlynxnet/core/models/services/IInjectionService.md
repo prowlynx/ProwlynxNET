@@ -52,29 +52,24 @@ Injects the specified Module to another module.
 
 #### Inject [2/3]
 ```csharp
-public IMemberDefinition Inject(IMemberDefinition def, ModuleDefinition target)
+public T Inject<T>(T def, ModuleDefinition target)
+where T : IMemberDefinition
 ```
 ##### Arguments
 | Type | Name | Description |
 | --- | --- | --- |
-| `IMemberDefinition` | def | The source definition. |
-| `ModuleDefinition` | target | The target module. |
-
-##### Summary
-Injects the specified definition to another module.
-                Does NOT add the result to the module.
-
-##### Returns
-The injected definition.
+| `T` | def |   |
+| `ModuleDefinition` | target |   |
 
 #### Inject [3/3]
 ```csharp
-public IList<IMemberDefinition> Inject(IEnumerable<IMemberDefinition> def, ModuleDefinition target)
+public IList<T> Inject<T>(IEnumerable<T> def, ModuleDefinition target)
+where T : IMemberDefinition
 ```
 ##### Arguments
 | Type | Name | Description |
 | --- | --- | --- |
-| `IEnumerable`&lt;`IMemberDefinition`&gt; | def |   |
+| `IEnumerable`&lt;`T`&gt; | def |   |
 | `ModuleDefinition` | target |   |
 
 *Generated with* [*ModularDoc*](https://github.com/hailstorm75/ModularDoc)
