@@ -8,6 +8,15 @@ An open source .NET 8 obfuscation engine for everyone.
 
 **Note**: Post Build Events use `xcopy` which may not be accessible on your platform. Check out the Example Protection csproj files.
 
+# Building from Source
+Executables and packages are not available to download directly. It is expected that you either:
+* Build the project from source and edit it, or
+* Include the project as a git submodule.
+
+To build the project you will need to adjust the output type of ProwlynxNET project to be an executable (if you want to run the examples). Else, leave it as a library and ignore it for the most part. 
+
+The ProwlynxNET.Core is the only real shared code that should be referenced by your project.
+
 # Services
 An obfuscator generally requires several services, why make this difficult? Let's not.
 
