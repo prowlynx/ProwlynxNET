@@ -22,10 +22,10 @@ namespace ProwlynxNET.Core.Services.Argument
         public string Description => $"Argument Service for {Name}";
 
         /// <inheritdoc />
-        public NameValueCollection Arguments { get; set; }
+        public Dictionary<string, object> Arguments { get; set; }
 
         /// <inheritdoc />
-        public string this[string name]
+        public object this[string name]
         {
             get => Arguments[name]!;
             set => Arguments[name] = value;
@@ -42,7 +42,7 @@ namespace ProwlynxNET.Core.Services.Argument
         public ArgumentService(string protectionName)
         {
             Name = protectionName;
-            Arguments = new NameValueCollection();
+            Arguments = new Dictionary<string, object>();
         }
 
         #endregion
@@ -50,7 +50,7 @@ namespace ProwlynxNET.Core.Services.Argument
         #region Public Methods
 
         /// <inheritdoc />
-        public void Add(string name, string value)
+        public void Add(string name, object value)
         {
             Arguments.Add(name, value);
         }
@@ -58,7 +58,7 @@ namespace ProwlynxNET.Core.Services.Argument
         /// <inheritdoc />
         public bool Has(string name)
         {
-            return Arguments.AllKeys.Contains(name);
+            return Arguments.ContainsKey(name);
         }
 
         #endregion

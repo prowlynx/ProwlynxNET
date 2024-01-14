@@ -18,14 +18,14 @@ namespace ProwlynxNET.Core.Models.Services
         /// <summary>
         ///     The list of arguments for a particular <see cref="IProtection" />
         /// </summary>
-        NameValueCollection Arguments { get; }
+        Dictionary<string, object> Arguments { get; }
 
         /// <summary>
         ///     Get an argument value by its name (key).
         /// </summary>
         /// <param name="name">The name of the argument (key) passed in when added.</param>
         /// <returns>The value of the argument.</returns>
-        string this[string name] { get; set; }
+        object this[string name] { get; set; }
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace ProwlynxNET.Core.Models.Services
         /// </summary>
         /// <param name="name">The name of the argument (key)</param>
         /// <param name="value">The value of the argument</param>
-        void Add(string name, string value);
+        void Add(string name, object value);
 
         /// <summary>
         ///     Check whether the argument name exists.
