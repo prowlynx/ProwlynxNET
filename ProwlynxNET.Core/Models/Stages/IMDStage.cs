@@ -19,7 +19,7 @@ namespace ProwlynxNET.Core.Models.Stages
         /// </summary>
         /// <param name="t">The task, noting that Module is inaccessible (null).</param>
         /// <param name="peImage">The PE Image with DotNetDirectory.</param>
-        void Process(ObfuscationTask t, IPEImage peImage);
+        void Process(ObfuscationTask t, PEImage peImage);
 
         #endregion
     }

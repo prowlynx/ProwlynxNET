@@ -32,7 +32,7 @@ namespace ProwlynxNET.Core.Protections
         #region Public Methods
 
         /// <inheritdoc />
-        public abstract void Process(ObfuscationTask t, IPEImage peImage);
+        public abstract void Process(ObfuscationTask t, PEImage peImage);
 
         #endregion
     }
