@@ -38,7 +38,7 @@ namespace ProwlynxNET.Core.Models.Services
         /// <param name="def">The source definitions.</param>
         /// <param name="target">The target module.</param>
         /// <returns>The injected definitions.</returns>
-        IList<T> Inject<T>(IEnumerable<T> def, ModuleDefinition target) where T : IMemberDefinition;
+        IList<IMemberDescriptor> Inject<T>(IEnumerable<T> def, ModuleDefinition target) where T : IMemberDefinition;
 
         #endregion
     }

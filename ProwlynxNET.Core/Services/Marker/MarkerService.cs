@@ -46,7 +46,7 @@ namespace ProwlynxNET.Core.Services.Marker
         }
 
         /// <inheritdoc />
-        public bool CanProtect(IProtection currentProtection, TypeDefinition targetType, bool checkForPropagation = false)
+        public bool CanProtect(IProtection currentProtection, TypeDefinition targetType, bool checkForPropagation = false, bool defaultToTrue = true)
         {
             if (targetType == null) throw new ArgumentException(nameof(targetType));
 
@@ -79,11 +79,11 @@ namespace ProwlynxNET.Core.Services.Marker
                     if (o.Exclude)
                         return false;
 
-            return true;
+            return defaultToTrue;
         }
 
         /// <inheritdoc />
-        public bool CanProtect(IProtection currentProtection, MethodDefinition targetMethod)
+        public bool CanProtect(IProtection currentProtection, MethodDefinition targetMethod, bool defaultToTrue = true)
         {
             if (targetMethod == null) throw new ArgumentException(nameof(targetMethod));
 
@@ -91,7 +91,7 @@ namespace ProwlynxNET.Core.Services.Marker
             if (declaringType != null)
                 if (!CanProtect(currentProtection, declaringType))
                     return false;
-
+            var hasHit = false;
             // Search the methoddef records.
             List<ObfuscationInfo> methodObfs = Database.Obfuscations
                                                        .Where(o =>
@@ -102,14 +102,32 @@ namespace ProwlynxNET.Core.Services.Marker
                                                        .ToList();
             if (methodObfs.Count > 0)
                 foreach (var o in methodObfs)
+                {
                     if (o.Exclude)
+                    {
                         return false;
+                    }
+                    else
+                    {
+                        hasHit = true;
+                    }
+                }
+                    
+          
 
-            return true;
+            if (!hasHit && defaultToTrue)
+            {
+                return true;
+            }
+            else if (hasHit)
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <inheritdoc />
-        public bool CanProtect(IProtection currentProtection, EventDefinition targetEvent)
+        public bool CanProtect(IProtection currentProtection, EventDefinition targetEvent, bool defaultToTrue = true)
         {
             if (targetEvent == null) throw new ArgumentException(nameof(targetEvent));
 
@@ -131,11 +149,11 @@ namespace ProwlynxNET.Core.Services.Marker
                     if (o.Exclude)
                         return false;
 
-            return true;
+            return defaultToTrue;
         }
 
         /// <inheritdoc />
-        public bool CanProtect(IProtection currentProtection, PropertyDefinition targetProperty)
+        public bool CanProtect(IProtection currentProtection, PropertyDefinition targetProperty, bool defaultToTrue = true)
         {
             if (targetProperty == null) throw new ArgumentException(nameof(targetProperty));
 
@@ -157,7 +175,7 @@ namespace ProwlynxNET.Core.Services.Marker
                     if (o.Exclude)
                         return false;
 
-            return true;
+            return defaultToTrue;
         }
 
         #endregion

@@ -49,14 +49,13 @@ namespace ProwlynxNET.Core.Services.Injector
         }
 
         /// <inheritdoc />
-        public IList<T> Inject<T>(IEnumerable<T> def, ModuleDefinition target) where T : IMemberDefinition
+        public IList<IMemberDescriptor> Inject<T>(IEnumerable<T> def, ModuleDefinition target) where T : IMemberDefinition
         {
             var results = new MemberCloner(target)
                                 // Why...? .NET...
                                 .Include(def.Cast<IMemberDefinition>())
                                 .Clone();
             return results.ClonedMembers
-                .Cast<T>()
                 .ToList();
         }
 

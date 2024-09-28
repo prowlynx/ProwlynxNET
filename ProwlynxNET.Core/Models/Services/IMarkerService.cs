@@ -45,32 +45,36 @@ namespace ProwlynxNET.Core.Models.Services
         /// <param name="currentProtection">The protection currently running.</param>
         /// <param name="targetType">The target type to protect.</param>
         /// <param name="checkForPropagation">Used internally for recursion. Whether to check that the types apply to members.</param>
+        /// <param name="defaultToTrue">Whether to default return true when it is not excluded.</param>
         /// <returns>Whether the protection can protect the target type.</returns>
-        bool CanProtect(IProtection currentProtection, TypeDefinition targetType, bool checkForPropagation = false);
+        bool CanProtect(IProtection currentProtection, TypeDefinition targetType, bool checkForPropagation = false, bool defaultToTrue = true);
 
         /// <summary>
         ///     Check whether the protection can protect a given method.
         /// </summary>
         /// <param name="currentProtection">The protection currently running.</param>
         /// <param name="targetMethod">The method that is to be protected.</param>
+        /// <param name="defaultToTrue">Whether to default return true when it is not excluded.</param>
         /// <returns>Whether the protection can protect the target method.</returns>
-        bool CanProtect(IProtection currentProtection, MethodDefinition targetMethod);
+        bool CanProtect(IProtection currentProtection, MethodDefinition targetMethod, bool defaultToTrue = true);
 
         /// <summary>
         ///     Check whether the protection can protect a given event.
         /// </summary>
         /// <param name="currentProtection">The protection currently running.</param>
         /// <param name="targetEvent">The event that is to be protected.</param>
+        /// <param name="defaultToTrue">Whether to default return true when it is not excluded.</param>
         /// <returns>Whether the protection can protect the target event.</returns>
-        bool CanProtect(IProtection currentProtection, EventDefinition targetEvent);
+        bool CanProtect(IProtection currentProtection, EventDefinition targetEvent, bool defaultToTrue = true);
 
         /// <summary>
         ///     Check whether the protection can protect a given property.
         /// </summary>
         /// <param name="currentProtection">The protection currently running.</param>
         /// <param name="targetProperty">The property that is to be protected.</param>
+        /// <param name="defaultToTrue">Whether to default return true when it is not excluded.</param>
         /// <returns>Whether the protection can protect the target property.</returns>
-        bool CanProtect(IProtection currentProtection, PropertyDefinition targetProperty);
+        bool CanProtect(IProtection currentProtection, PropertyDefinition targetProperty, bool defaultToTrue = true);
 
         #endregion
     }
