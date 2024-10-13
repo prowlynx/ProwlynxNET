@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 using ProwlynxNET.Extensions;
 using AsmResolver.DotNet.Builder;
 using AsmResolver.DotNet.Code.Cil;
-using AsmResolver.PE.DotNet.Builder;
 using AsmResolver.PE;
+using AsmResolver.PE.Builder;
 using ProwlynxNET.Core.Protections;
 
 namespace ProwlynxNET.Engine
@@ -111,7 +111,7 @@ namespace ProwlynxNET.Engine
 
 
             // Now we can re-read it and process metadata again.
-            IPEImage peImage = PEImage.FromFile(tempFilePath);
+            PEImage peImage = PEImage.FromFile(tempFilePath);
 
             // Make module inaccessible.
             // MD Stages that want to access this can themselves serialize/deserialize down/up the layers of abstraction.
@@ -199,7 +199,7 @@ namespace ProwlynxNET.Engine
         /// </summary>
         /// <param name="protection">The protection.</param>
         /// <param name="peImage">The PE Image with a metadata stream.</param>
-        private void RunMDStages(IProtection protection, IPEImage peImage)
+        private void RunMDStages(IProtection protection, PEImage peImage)
         {
             foreach (var protectionStage in protection.GetStages<MDStage>())
             {
