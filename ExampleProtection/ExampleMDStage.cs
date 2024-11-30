@@ -39,7 +39,7 @@ namespace ExampleProtection
         #region Public Methods
 
         /// <inheritdoc />
-        public override void Process(ObfuscationTask t, IPEImage peImage)
+        public override void Process(ObfuscationTask t, PEImage peImage)
         {
             t.Logger.LogDebug($"[{GetType().Name}] - Successfully called");
         }
